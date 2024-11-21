@@ -1,25 +1,22 @@
-import { Fragment } from "react";
-import { View, Text } from "react-native";
+import { ImageBackground } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { s } from "./home.style";
+import { s } from "./index.style";
+import Home from "./pages/Home";
 
 const Index = () => {
+  const backGroundImage = require("../assets/images/background.png");
   return (
-    <Fragment>
+    <ImageBackground
+      style={s.containerBackGround}
+      source={backGroundImage}
+      imageStyle={s.backGroundImg}
+    >
       <SafeAreaProvider>
         <SafeAreaView style={s.main}>
-          <View style={s.header}>
-            <Text>Header</Text>
-          </View>
-          <View style={s.body}>
-            <Text>Body</Text>
-          </View>
+          <Home />
         </SafeAreaView>
       </SafeAreaProvider>
-      <View style={s.footer}>
-        <Text>Footer</Text>
-      </View>
-    </Fragment>
+    </ImageBackground>
   );
 };
 
