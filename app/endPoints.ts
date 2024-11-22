@@ -6,15 +6,15 @@ type GetLocationType = {
   longitude: number;
 };
 
-export const pokemonApi = createApi({
-  reducerPath: "pokemonApi",
+export const meteoApi = createApi({
+  reducerPath: "meteoApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://api.open-meteo.com/v1/" }),
   endpoints: (builder) => ({
     getLocation: builder.query<GetLocationType, any>({
       query: ({ latitude, longitude }) =>
-        `forecast?latitude=${latitude}&longitude=${longitude}`,
+        `forecast?latitude=${latitude}&longitude=${longitude}&daily=weathercode,temperature_2m_max,sunrise,sunset,windspeed_10m_max&timezone=auto&current_weather=true`,
     }),
   }),
 });
 
-export const { useGetLocationQuery } = pokemonApi;
+export const { useGetLocationQuery } = meteoApi;

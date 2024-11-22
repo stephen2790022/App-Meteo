@@ -5,15 +5,24 @@ import {
   requestForegroundPermissionsAsync,
   getCurrentPositionAsync,
 } from "expo-location";
+import { meteoApi } from "../endPoints";
 
 type LocationType = {
   latitude: number;
   longitude: number;
 };
 const Home = () => {
-  const [currentLocation, setCurrentLocation] = useState<LocationType | null>(
-    null
-  );
+  const defaultLocation = {
+    latitude: 35.64976140071828,
+    longitude: 139.91252522559532,
+  };
+  const [currentLocation, setCurrentLocation] =
+    useState<LocationType>(defaultLocation);
+  const [weatherData, setWeatherData] = useState<any>();
+
+  const [getWether, { isLoading }] =
+    meteoApi.endpoints.getLocation.useLazyQuery();
+
   async function getLocation() {
     const { status } = await requestForegroundPermissionsAsync();
     if (status === "granted") {
@@ -21,13 +30,27 @@ const Home = () => {
         coords: { latitude, longitude },
       } = await getCurrentPositionAsync();
       setCurrentLocation({ latitude, longitude });
-      console.log(location);
+    } else {
+      setCurrentLocation(defaultLocation);
     }
   }
+
+  const getWeatherData = async () => {
+    const { data } = await getWether(currentLocation);
+    setWeatherData(data);
+  };
 
   useEffect(() => {
     getLocation();
   }, []);
+
+  useEffect(() => {
+    getWeatherData();
+  }, [currentLocation]);
+
+  console.log(weatherData);
+
+  if (isLoading) return <Text>Loading...</Text>;
 
   return (
     <Fragment key="Home">

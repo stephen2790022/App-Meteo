@@ -10,6 +10,6 @@ export const s = StyleSheet.create({
     paddingHorizontal: 10,
   },
   backGroundImg: {
-    opacity: 0.9,
+    opacity: 0.75,
   },
 });
