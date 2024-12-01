@@ -4,7 +4,7 @@ const s = StyleSheet.create({
   text: {
     color: "#ffff",
     fontFamily: "Alata-Regular",
-    fontSize: 20,
+    fontSize: 30,
   },
 });
 

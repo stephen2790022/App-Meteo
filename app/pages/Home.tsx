@@ -8,6 +8,7 @@ import {
 import { meteoApi } from "../endPoints";
 import { StyledText } from "../components/Ui/StyledText/styled-text.component";
 import { MeteoBasic } from "../components/MeteoBasic/meteo-basic.component";
+import { getWeatherInterpration } from "../meteo-service";
 
 type LocationType = {
   latitude: number;
@@ -21,6 +22,7 @@ const Home = () => {
   const [currentLocation, setCurrentLocation] =
     useState<LocationType>(defaultLocation);
   const [weatherData, setWeatherData] = useState<any>();
+  const currentTemperature = weatherData?.current_weather;
 
   const [getWether, { isLoading }] =
     meteoApi.endpoints.getLocation.useLazyQuery();
@@ -53,12 +55,17 @@ const Home = () => {
 
   console.log(weatherData);
 
-  if (isLoading) return <Text>Loading...</Text>;
+  if (isLoading && !currentTemperature) return <Text>Loading...</Text>;
 
   return (
     <Fragment key="Home">
       <View style={s.meteoBasic}>
-        <MeteoBasic />
+        <MeteoBasic
+          currentTemperature={Math.round(currentTemperature?.temperature)}
+          interpretation={getWeatherInterpration(
+            currentTemperature?.weathercode
+          )}
+        />
       </View>
       <View style={s.searchBar}></View>
       <View style={s.meteoAdvanced}></View>
