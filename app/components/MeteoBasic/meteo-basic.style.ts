@@ -11,7 +11,6 @@ const s = StyleSheet.create({
   image: {
     width: 90,
     height: 90,
-    backgroundColor: "#fffff",
   },
   temperatureContainer: {
     flexDirection: "row",

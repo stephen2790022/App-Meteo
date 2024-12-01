@@ -1,7 +1,9 @@
 import { StyleSheet } from "react-native";
 
 const s = StyleSheet.create({
-  meteoBasic: {},
+  meteoBasic: {
+    gap: 10,
+  },
   searchBar: {},
   meteoAdvanced: {},
 });
