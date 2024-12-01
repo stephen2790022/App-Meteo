@@ -7,6 +7,7 @@ import {
 } from "expo-location";
 import { meteoApi } from "../endPoints";
 import { StyledText } from "../components/Ui/StyledText/styled-text.component";
+import { MeteoBasic } from "../components/MeteoBasic/meteo-basic.component";
 
 type LocationType = {
   latitude: number;
@@ -57,7 +58,7 @@ const Home = () => {
   return (
     <Fragment key="Home">
       <View style={s.meteoBasic}>
-        <StyledText>TestText</StyledText>
+        <MeteoBasic />
       </View>
       <View style={s.searchBar}></View>
       <View style={s.meteoAdvanced}></View>

@@ -4,8 +4,9 @@ import { s } from "./styled-text.style";
 
 type StyledTextProps = {
   children: ReactNode;
+  customStyle?: object;
 };
 
-export const StyledText = ({ children }: StyledTextProps) => {
-  return <Text style={[s.text]}>{children}</Text>;
+export const StyledText = ({ children, customStyle }: StyledTextProps) => {
+  return <Text style={[s.text, customStyle]}>{children}</Text>;
 };
